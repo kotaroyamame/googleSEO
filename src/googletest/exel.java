@@ -14,12 +14,20 @@ public class exel {
   FileInputStream in = null;
   Workbook wb = null;
   private String filename_="testExample.xls";
-  private int startGyo=7;//最初のデータが入っている行番号
   private int startRetsu=1;//最初のデータが入っている列番号
+  private int startGyo=7;//最初のデータが入っている行番号
   //private int gyoSize=24;
   public exel() {
   }
   public exel(String filename) {
+    filename_=filename;
+  }
+  public exel(String filename,int x, int y) {
+    filename_=filename;
+    startRetsu=x;
+    startGyo=y;
+  }
+  public void setFilename(String filename) {
     filename_=filename;
   }
   public int getStartGyo(){

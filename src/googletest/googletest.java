@@ -16,12 +16,11 @@ import org.apache.http.util.EntityUtils;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 
-
 public class googletest {
 
   public static void main( String[] args ){
     GoogleSearch search=new GoogleSearch();
-    exel ex=new exel();
+    exel ex=new exel("testExample.xls",1,7);//エクセルファイル名,先頭検索ワードの座標x,先頭検索ワードの座標y
     String word="";
     int y=ex.getStartGyo();
     int x=ex.getStartRetsu();
