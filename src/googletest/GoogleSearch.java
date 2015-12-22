@@ -12,26 +12,26 @@ import org.apache.http.impl.client.DefaultHttpClient;
 @SuppressWarnings("deprecation")
 public class GoogleSearch {
 
-	public GoogleSearch() {
-		// TODO Auto-generated constructor stub
-	}
-	@SuppressWarnings({ "resource" })
-	public List<SearchModel> serch(String word) throws ClientProtocolException, IOException{
-		
-		StringBuffer buf =new StringBuffer();
-	    String url;
-	    buf.append("http://www.google.co.jp/search?&num=20&q=");
-	    buf.append(URLEncoder.encode( word, "utf-8" ));
-	    url=buf.toString();
+  public GoogleSearch() {
+    // TODO Auto-generated constructor stub
+  }
+  @SuppressWarnings({ "resource" })
+  public List<SearchModel> serch(String word) throws ClientProtocolException, IOException{
 
-	    DefaultHttpClient client = new DefaultHttpClient();
-	    HttpGet httpGet = new HttpGet( url );
-	    ResponseHandler<List<SearchModel>> handler = new GoogleSearchResponseHandler();
-	    List<SearchModel> list = client.execute( httpGet, handler );
+    StringBuffer buf =new StringBuffer();
+    String url;
+    buf.append("http://www.google.co.jp/search?&num=20&q=");
+    buf.append(URLEncoder.encode( word, "utf-8" ));
+    url=buf.toString();
 
-	    client.getConnectionManager().shutdown();
-	    return list;
-	  }
-	}
+    DefaultHttpClient client = new DefaultHttpClient();
+    HttpGet httpGet = new HttpGet( url );
+    ResponseHandler<List<SearchModel>> handler = new GoogleSearchResponseHandler();
+    List<SearchModel> list = client.execute( httpGet, handler );
+
+    client.getConnectionManager().shutdown();
+    return list;
+  }
+}
 
 
