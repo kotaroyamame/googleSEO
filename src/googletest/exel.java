@@ -22,6 +22,12 @@ public class exel {
 	public exel(String filename) {
 		filename_=filename;
 	}
+	public int getStartGyo(){
+		return startGyo;
+	}
+	public int getStartRetsu(){
+		return startRetsu;
+	}
 	public void setStartgyo(int a){
 		startGyo=a;
 	}
@@ -80,13 +86,16 @@ public class exel {
 		}
 		Sheet sheet = wb.getSheetAt(0);
 		Row row = sheet.getRow(y);
+		if(row==null){
+			return null;
+		}
 		Cell cell1 = row.getCell(x);
 		int celltype=cell1.getCellType();
 		if(celltype==Cell.CELL_TYPE_STRING) {
 
 				nun= cell1.getStringCellValue();
 		}else{
-			return "";
+			return null;
 		}
 		return nun;
 	}

@@ -23,30 +23,45 @@ public class googletest {
 	  GoogleSearch search=new GoogleSearch();
 	  exel ex=new exel();
 	   String word="";
-	    word=ex.getSEString(1, 7);//エクセルファイルの指定座標ワードで検索
-	    System.out.println(word);
-	  try {
-		List<SearchModel> list;
-		list=search.serch(word);
-		System.out.println(list.get(0).getTitle());
-		ex.makeCell(2, 7, list.get(0).getTitle());
-	} catch (ClientProtocolException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	   	int y=ex.getStartGyo();
+	   	int x=ex.getStartRetsu();
+	   	String url=ex.getSEString(1, 3);
+		    
+			try {
+			do{
+				word=ex.getSEString(x, y);//エクセルファイルの指定座標ワードで検索
+			    if(word==null){
+			    	break;
+			    }
+				List<SearchModel> list;
+				list=search.serch(word);
+				System.out.println(list.get(0).getTitle());
+				String msg="圏外";
+				for(SearchModel model:list){
+					int t=model.getHref().indexOf(url);
+					if(t!=-1){
+						msg=String.valueOf(list.indexOf(model));
+					}
+				}
+				ex.makeCell(x+1, y, msg);
+				ex.makeCell(x+2, y, list.get(0).getTitle());
+				ex.makeCell(x+3, y, list.get(1).getTitle());
+				y++;
+			}while(!(word.equals(""))||(word!=null));
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   	
 	  
   }
     
 
 }
 
-/**
- * Google検索の中身をHttpCleanerを使用して解析し、
- * 検索結果のリンク先をList<String>で返す
- */
 class GoogleSearchResponseHandler
     implements ResponseHandler<List<SearchModel>> {
 
@@ -60,44 +75,38 @@ class GoogleSearchResponseHandler
           statusLine.getReasonPhrase());
     }
     
-    // contentsの取得
     HttpEntity entity = response.getEntity();
     String contents = EntityUtils.toString(entity);
     
-    // HtmlCleaner召還
     HtmlCleaner cleaner = new HtmlCleaner();
     TagNode node = cleaner.clean( contents );
 
-    // 解析結果格納用リスト
     List<SearchModel> list = new ArrayList<SearchModel>();
     
-    // まずliを対象にする
     TagNode[] liNodes = node.getElementsByName("li", true);
     for( TagNode liNode : liNodes ) {
-      // クラスがgじゃなかったら、多分リンクじゃないので除外
-      if( !"g".equals( liNode.getAttributeByName( "class" ) ) )
+      if( !"g".equals( liNode.getAttributeByName( "class" ) ) ){
         continue;
-
+      }
       SearchModel model = new SearchModel();
       
-      // タイトルの取得
       TagNode h3Node = liNode.findElementByName("h3", false);
-      if( h3Node == null )
+      if( h3Node == null ){
         continue;
+      }
       model.setTitle( h3Node.getText().toString() );
       
-      // URLの取得
       TagNode aNode = h3Node.findElementByName("a", false);
-      if( aNode == null )
+      if( aNode == null ){
         continue;
+      }
          model.setHref( aNode.getAttributeByName("href") );
          
-         // 概要の取得
          TagNode divNode = liNode.findElementByName("div", false);
-         if( divNode == null )
+         if( divNode == null ){
            continue;
+         }
          model.setDescription( divNode.getText().toString() );
-         
          list.add( model );
     }
     
