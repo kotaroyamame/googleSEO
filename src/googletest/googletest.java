@@ -47,6 +47,7 @@ public class googletest {
 				ex.makeCell(x+1, y, msg);
 				ex.makeCell(x+2, y, list.get(0).getTitle());
 				ex.makeCell(x+3, y, list.get(1).getTitle());
+				ex.makeCell(x+4, y, list.get(2).getTitle());
 				y++;
 			}while(!(word.equals(""))||(word!=null));
 			} catch (ClientProtocolException e) {
@@ -56,7 +57,7 @@ public class googletest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	   	System.out.println("終了");
+	   	System.out.println("end");
 	  
   }
     
