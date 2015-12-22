@@ -40,7 +40,8 @@ public class googletest {
 				for(SearchModel model:list){
 					int t=model.getHref().indexOf(url);
 					if(t!=-1){
-						msg=String.valueOf(list.indexOf(model));
+						msg=String.valueOf(list.indexOf(model)+1);
+						break;
 					}
 				}
 				ex.makeCell(x+1, y, msg);
@@ -55,7 +56,7 @@ public class googletest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	   	
+	   	System.out.println("終了");
 	  
   }
     
