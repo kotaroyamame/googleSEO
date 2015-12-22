@@ -5,4 +5,4 @@
 ###参考サイト様
 
 mwSoft blog 様
-    : http://blog.mwsoft.jp/article/34841195.html
+: http://blog.mwsoft.jp/article/34841195.html
