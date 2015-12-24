@@ -5,14 +5,11 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-@SuppressWarnings("deprecation")
 public class GoogleSearch {
   private int SiteRankNun=30;
   public GoogleSearch() {
@@ -34,7 +31,6 @@ public class GoogleSearch {
     ResponseHandler<List<SearchModel>> handler = new GoogleSearchResponseHandler();
     List<SearchModel> list = client.execute( httpGet, handler );
 
-   // client.getConnectionManager().shutdown();
     return list;
   }
 }

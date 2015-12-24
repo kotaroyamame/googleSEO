@@ -1,14 +1,10 @@
 package googletest;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import java.awt.List;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class exel {	
   FileInputStream in = null;
@@ -144,7 +140,7 @@ public class exel {
     return nun;
   }
 
-  public ArrayList<String> get(int gyo, int gyoend) {
+  public ArrayList<String> getGyo(int gyo, int gyoend) {
     int gyoSize = gyoend - gyo;
     try {
       in = new FileInputStream("testExample.xls");
