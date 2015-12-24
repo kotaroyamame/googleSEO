@@ -5,9 +5,12 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 @SuppressWarnings("deprecation")
 public class GoogleSearch {
@@ -15,7 +18,7 @@ public class GoogleSearch {
   public GoogleSearch() {
     // TODO Auto-generated constructor stub
   }
-  @SuppressWarnings({ "resource" })
+  
   public List<SearchModel> serch(String word) throws ClientProtocolException, IOException{
 
     StringBuffer buf =new StringBuffer();
@@ -26,12 +29,12 @@ public class GoogleSearch {
     buf.append(URLEncoder.encode( word, "utf-8" ));
     url=buf.toString();
 
-    DefaultHttpClient client = new DefaultHttpClient();
+    CloseableHttpClient client = HttpClientBuilder.create().build();
     HttpGet httpGet = new HttpGet( url );
     ResponseHandler<List<SearchModel>> handler = new GoogleSearchResponseHandler();
     List<SearchModel> list = client.execute( httpGet, handler );
 
-    client.getConnectionManager().shutdown();
+   // client.getConnectionManager().shutdown();
     return list;
   }
 }
