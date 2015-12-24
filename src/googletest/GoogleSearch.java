@@ -11,7 +11,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 @SuppressWarnings("deprecation")
 public class GoogleSearch {
-
+  private int SiteRankNun=30;
   public GoogleSearch() {
     // TODO Auto-generated constructor stub
   }
@@ -20,7 +20,9 @@ public class GoogleSearch {
 
     StringBuffer buf =new StringBuffer();
     String url;
-    buf.append("http://www.google.co.jp/search?&num=20&q=");
+    buf.append("http://www.google.co.jp/search?&num=");
+    buf.append(SiteRankNun);
+    buf.append("&q=");
     buf.append(URLEncoder.encode( word, "utf-8" ));
     url=buf.toString();
 
