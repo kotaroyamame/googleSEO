@@ -32,9 +32,9 @@ public class googletest {
           }
         }
         ex.makeCell(x+1, y, msg);
-        ex.makeCell(x+2, y, list.get(0).getTitle());
-        ex.makeCell(x+3, y, list.get(1).getTitle());
-        ex.makeCell(x+4, y, list.get(2).getTitle());
+        for(int i=0;i<10;i++){
+          ex.makeCell(x+i+2, y, list.get(i).getTitle());
+        }
         y++;
       }while(!(word.equals(""))||(word!=null));
     } catch (ClientProtocolException e) {
