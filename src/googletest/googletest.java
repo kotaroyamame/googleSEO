@@ -7,6 +7,7 @@ import org.apache.http.client.ClientProtocolException;
 public class googletest {
 
   public static void main( String[] args ){
+    System.setProperty("proxySet", "false");
     GoogleSearch search=new GoogleSearch();
     exel ex=new exel("testExample.xls",1,7);//エクセルファイル名,先頭検索ワードの座標x,先頭検索ワードの座標y
     String word="";

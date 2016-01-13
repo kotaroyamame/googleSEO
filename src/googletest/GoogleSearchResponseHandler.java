@@ -33,7 +33,8 @@ public class GoogleSearchResponseHandler implements ResponseHandler<List<SearchM
 
     List<SearchModel> list = new ArrayList<SearchModel>();
 
-    TagNode[] liNodes = node.getElementsByName("li", true);
+    TagNode[] liNodes = node.getElementsByName("ol", true)[0].getElementsByName("div", true);
+    //TagNode[] liNodes = node.evaluateXPath("//ol/div");
     for( TagNode liNode : liNodes ) {
       if( !"g".equals( liNode.getAttributeByName( "class" ) ) ){
         continue;

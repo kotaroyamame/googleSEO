@@ -29,8 +29,8 @@ public class GoogleSearch {
     CloseableHttpClient client = HttpClientBuilder.create().build();
     HttpGet httpGet = new HttpGet( url );
     ResponseHandler<List<SearchModel>> handler = new GoogleSearchResponseHandler();
+    
     List<SearchModel> list = client.execute( httpGet, handler );
-
     return list;
   }
 }
